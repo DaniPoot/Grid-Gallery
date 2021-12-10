@@ -1,0 +1,133 @@
+:root {
+--white: hsl(0, 0%, 100%); 
+--black: #111111; 
+--body1-regular: 400 1rem/1.5rem Poppins; 
+--body1-bold: 700 1rem/1.5rem Poppins;  
+}
+
+*, *::after, *::before {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  color: var(--white);
+  background-color: var(--black);
+  font: var(--body1-regular);
+}
+
+.grid-title {
+  margin: 2rem 0rem;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: subgrid;
+  align-items: stretch;
+  grid-template-rows: masonry;
+  gap: 30px;
+  grid-auto-flow: row dense;
+  /* position: relative; */
+}
+
+.place-container {
+  position: relative;
+}
+
+.place-container:nth-child(2n) {
+  grid-row: span 2;
+}
+
+.place-container:nth-child(2n+1) {
+  grid-row: span 3;
+}
+
+.place-container:nth-child(5n) {
+  grid-row: span 4;
+}
+
+.place-info, .place-location {
+  border-radius: 15px;
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+}
+
+.place-info {
+  z-index: 1;
+}
+.place-city, .place-country {
+  position: absolute;
+  left: 1.2rem;
+}
+
+.place-city {
+  bottom: 2.5rem;
+  font: var(--body1-bold);
+  transition: opacity 1s ease-in-out;
+}
+
+.place-country {
+  bottom: 1rem;
+  font: var(--body1-regular);
+  transition: opacity 1s ease-in-out;
+}
+
+.place-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.place-location {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  content: "";
+  width: 100%;
+  top: 0;
+  z-index: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  transition: all 1s ease-in-out;
+  opacity: 0;
+}
+
+.place-container:hover .place-city {
+  opacity: 0;
+}
+
+.place-container:hover .place-country {
+  opacity: 0;
+}
+
+.place-container:hover .place-location {
+  z-index: 2;
+  opacity: 1;
+}
+
+.place-location-link {
+  color: white;
+  text-decoration: none;
+  padding: .2rem .5rem;
+  font-size: .5rem;
+  background-color: #00A2FF;
+  border-radius: 8px;
+}
+
+.place-location-link img {
+  vertical-align: middle;
+}
+
+@media screen and (min-width: 47em) {
+  .grid-container {
+    grid-template-columns: repeat(3, minmax(100px, 1fr));
+  }
+  
+  .place-location-link {
+    font-size: 1rem;
+    padding: .5rem 1rem;
+  }
+}
